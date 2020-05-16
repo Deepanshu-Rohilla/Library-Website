@@ -10,6 +10,22 @@ function Display() {
     
 }
 
+Display.prototype.add = function (book) {
+    tableBody = document.getElementById('tableBody');
+    let uistring = `
+                    <tr>
+                    <td>${book.name}</td>
+                    <td>${book.author}</td>
+                    <td>${book.type}</td>
+                </tr> `;
+    tableBody.innerHTML += uistring;
+    
+};
+Display.prototype.clear = function () {
+    let libraryForm = document.getElementById('libraryForm');
+    libraryForm.reset();
+};
+
 let libraryForm = document.getElementById('libraryForm');
 libraryForm.addEventListener('submit', libraryFormSubmit);
 
@@ -35,5 +51,9 @@ function libraryFormSubmit(e) {
 
     let book = new Book(name, author, type);
     console.log(book);
+
+    let display = new Display();
+    display.add(book);
+    display.clear();
     e.preventDefault();
 }
